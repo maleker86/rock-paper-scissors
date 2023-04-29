@@ -2,6 +2,7 @@
 
 //must include getComputerChoice function to randomly return rps
 
+let roundCount = 0;
 let computerCount = 0;
 let playerCount = 0;
 
@@ -24,7 +25,8 @@ function getPlayerChoice() {
 let playerChoice = prompt("Rock, Paper, or Scissors?", "").toLowerCase();
 console.log(`Player wrote ${playerChoice}`);
 
-switch (playerChoice) { case "rock":
+switch (playerChoice) { 
+    case "rock":
 
 // console.log("rock");
 break;
@@ -41,48 +43,17 @@ console.log("please type rock paper or scissors");
 }
 
 //write a func that plays 1 game of rps. takes playerSelection & computerSelection and return a string that declares the winner like "You Lose! Paper beats Rock".
-function playRound(computerChoice,playerChoice) {
-    
-    switch (true) { case (computerChoice === playerChoice) : console.log("It's a tie"); break; case (computerChoice === "paper" && playerChoice === "rock") : console.log(`You lose! ${computerChoice} beats ${playerChoice}.`); computerCount = ++computerCount; break; case (computerChoice === "scissors" && playerChoice === "paper") : console.log(`You lose! ${computerChoice} beats ${playerChoice}.`); computerCount = ++computerCount; break; case (computerChoice === "rock" && playerChoice === "scissors") : console.log(`You lose! ${computerChoice} beats ${playerChoice}.`); computerCount = ++computerCount; break; case (playerChoice === "paper" && computerChoice === "rock") : console.log(`You win! ${playerChoice} beats ${computerChoice}.`); playerCount = ++playerCount; break; case (playerChoice === "scissors" && computerChoice === "paper") : console.log(`You win! ${playerChoice} beats ${computerChoice}.`); playerCount = ++playerCount; break; case (playerChoice === "rock" && computerChoice === "scissors") : console.log(`You win! ${playerChoice} beats ${computerChoice}.`); playerCount = ++playerCount; break; default: console.log("The game broke. Please try again."); }
+function playRound(computerChoice,playerChoice) {switch (true) { case (computerChoice === playerChoice) : console.log("It's a tie"); break; case (computerChoice === "paper" && playerChoice === "rock") : console.log(`You lose! ${computerChoice} beats ${playerChoice}.`); computerCount = ++computerCount; break; case (computerChoice === "scissors" && playerChoice === "paper") : console.log(`You lose! ${computerChoice} beats ${playerChoice}.`); computerCount = ++computerCount; break; case (computerChoice === "rock" && playerChoice === "scissors") : console.log(`You lose! ${computerChoice} beats ${playerChoice}.`); computerCount = ++computerCount; break; case (playerChoice === "paper" && computerChoice === "rock") : console.log(`You win! ${playerChoice} beats ${computerChoice}.`); playerCount = ++playerCount; break; case (playerChoice === "scissors" && computerChoice === "paper") : console.log(`You win! ${playerChoice} beats ${computerChoice}.`); playerCount = ++playerCount; break; case (playerChoice === "rock" && computerChoice === "scissors") : console.log(`You win! ${playerChoice} beats ${computerChoice}.`); playerCount = ++playerCount; break; default: console.log("The game broke. Please try again."); }
 
 // console.log(The winner is ${winner}.);
 // console.log(Computer has won ${computerCount} and player has won ${playerCount});
 }
 
 //NEW func called Game
-function Game() {
+function Game() {for (i = 0; i <= 4; i++) { roundCount = ++roundCount; console.log(`It is Round ${roundCount} of 5.`); playRound(getComputerChoice(),getPlayerChoice());
 
-//prev funcs to play 5 round game that has a winner or loser!!!
-for (i = 0; i <= 4; i++) {
-playRound(getComputerChoice(),getPlayerChoice());
-}console.log(`Computer has won ${computerCount} and player has won ${playerCount}`);
+}console.log(`Computer has won ${computerCount} and player has won ${playerCount}`); if (playerCount > computerCount) { console.log("Overall, Player wins"); } else if (playerCount < computerCount) { console.log("Overall, Comp wins"); } else { console.log("Overall, It's a Tie"); }
 
-//can also make some Helper Funcs :)
-if (playerCount > computerCount) {
-console.log("Overall, Player wins");
-} else if (playerCount < computerCount) {
-console.log("Overall, Comp wins");
-} else {
-console.log("Overall, It's a Tie");
 }
 
-// console.log(winner);
-
-// if winner === "Computer" {
-// winnerCount.comp = ++1;
-// } else if winner === "Player" {
-// winnerCount.player = ++1;
-// } else {
-// }
-
-// console.log(The winner is ${winner}.);
-// console.log(The win count is ${winnerCount}.);
-
-// playRound(getComputerChoice(),getPlayerChoice());
-
-// console.log();
-}
-
-Game();
-
-//note to self: make the Rounds List ..What Round you are On! Out of 5!!
+Game(); 
