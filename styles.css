@@ -3,3 +3,7 @@ body {
     background-color: black;
     font-family: Consolas, sans-serif;
 }
+
+a {
+    color:white;
+}
