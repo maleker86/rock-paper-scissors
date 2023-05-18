@@ -7,3 +7,11 @@ body {
 a {
     color:white;
 }
+
+button:hover {
+    background-color:yellow;
+}
+
+button:focus {
+    background-color: green;
+}
