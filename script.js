@@ -153,6 +153,9 @@ done.addEventListener("click", function (e) {
         if (playerCount < computerCount) {
           outcomeNote.textContent = "player loses!";
           outcome.append(outcomeNote);
+        } else if (playerCount === computerCount) {
+          outcomeNote.textContent = "it's a tie!";
+          outcome.append(outcomeNote);
         } else {
           outcomeNote.textContent = "player wins!";
           outcome.append(outcomeNote);
