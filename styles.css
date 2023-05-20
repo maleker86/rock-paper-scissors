@@ -46,6 +46,10 @@ button:focus {
     background-color: #3f8c8a;
 }
 
+#gameOver {
+    background-color: #407d97;
+}
+
 footer {
     margin-top:5vw;
 }

@@ -8,6 +8,7 @@ let playerCount = 0;
 const results = document.getElementById("results");
 const topbar = document.getElementById("topbar");
 const outcome = document.getElementById("outcome");
+const gameOver = document.getElementById("gameOver");
 
 let playerSpace = document.createElement("p");
 let computerSpace = document.createElement("p");
@@ -15,6 +16,7 @@ let errorMessage = document.createElement("p");
 let roundWinner = document.createElement("p");
 let roundCounter = document.createElement("p");
 let outcomeNote = document.createElement("p");
+let gameOverNote = document.createElement("p");
 
 let playerChoice;
 let computerChoice;
@@ -69,16 +71,17 @@ function getPlayerChoice() {
   }
 }
 
-function playRound(playerChoice, computerChoice) {
-  if (computerChoice && playerChoice) {
-    results.append(computerSpace);
-    results.append(playerSpace);
-    roundCount += 1;
-  } else {
-    errorMessage.textContent = "Please make a selection.";
-    results.append(errorMessage);
-    roundCount += 0;
-  }
+function getWinner(playerChoice, computerChoice) {
+  
+    if (computerChoice && playerChoice) {
+      results.append(computerSpace);
+      results.append(playerSpace);
+      roundCount++;
+    } else {
+      errorMessage.textContent = "Please make a selection.";
+      results.append(errorMessage);
+    }
+
   switch (true) {
     case playerChoice && computerChoice && playerChoice === computerChoice:
       console.log("tie");
@@ -118,13 +121,6 @@ function playRound(playerChoice, computerChoice) {
       outcomeNote.textContent = "No winner determined";
       break;
   }
-  results.append(roundWinner);
-
-  // console.log(It is Round ${roundCount});
-  roundCounter.textContent = `It is Round ${roundCount}`;
-  roundWinner.textContent = `Computer: ${computerCount} & Player ${playerCount}`;
-  topbar.append(roundCounter, roundWinner);
-  outcome.append(outcomeNote);
 
   // console.log(Computer wins is ${computerCount});
   // console.log(Player wins is ${playerCount});
@@ -132,30 +128,37 @@ function playRound(playerChoice, computerChoice) {
 
 done.addEventListener("click", function (e) {
     results.textContent = "";
-    playRound(getPlayerChoice(), getComputerChoice());
-  
-    // if (playerChoice) {
-    // playRound();
-    // } else {
-    // console.log("Help");
-    //
+    getWinner(getPlayerChoice(), getComputerChoice());
+    Game();
     playerChoice = null;
     computerChoice = null;
   });
   
   function Game() {
-    for (let i = 0; i < 5; i++) {
-      roundCounter.textContent = `It is Round ${roundCount}`;
-      topbar.append(roundCounter, roundWinner);
-      results.append();
-      outcome.append(outcomeNote);
-  
-      // playRound(getPlayerChoice(),getComputerChoice());
+
+      results.append(roundWinner);
+
+      // console.log(It is Round ${roundCount});
+      if (roundCount < 5) {
+        roundCounter.textContent = `It is Round ${roundCount} of 5`;
+        roundWinner.textContent = `Computer: ${computerCount} & Player ${playerCount}`;
+        topbar.append(roundCounter, roundWinner);
+        outcome.append(outcomeNote);
+      } else {
+        done.disabled = true;
+
+        roundCounter.textContent = `It is Round ${roundCount} of 5`;
+        roundWinner.textContent = `Computer: ${computerCount} & Player ${playerCount}`;
+        topbar.append(roundCounter, roundWinner);
+        if (playerCount < computerCount) {
+          outcomeNote.textContent = "player loses!";
+          outcome.append(outcomeNote);
+        } else {
+          outcomeNote.textContent = "player wins!";
+          outcome.append(outcomeNote);
+        }
+        gameOverNote.textContent = "It's all over folks!";
+        gameOver.appendChild(gameOverNote);
+      }
     }
-    if (roundCount === 5) {
-      gameOverNote.textContent = "It's all done!";
-      gameOver.appendChild(gameOverNote);
-    }
-  }
-  
-  Game();  
+    
