@@ -131,12 +131,31 @@ function playRound(playerChoice, computerChoice) {
 }
 
 done.addEventListener("click", function (e) {
-  results.textContent = "";
-  playRound(getPlayerChoice(), getComputerChoice());
-  playerChoice = null;
-  computerChoice = null;
-});
-
-function Game() {}
-
-Game();
+    results.textContent = "";
+    playRound(getPlayerChoice(), getComputerChoice());
+  
+    // if (playerChoice) {
+    // playRound();
+    // } else {
+    // console.log("Help");
+    //
+    playerChoice = null;
+    computerChoice = null;
+  });
+  
+  function Game() {
+    for (let i = 0; i < 5; i++) {
+      roundCounter.textContent = `It is Round ${roundCount}`;
+      topbar.append(roundCounter, roundWinner);
+      results.append();
+      outcome.append(outcomeNote);
+  
+      // playRound(getPlayerChoice(),getComputerChoice());
+    }
+    if (roundCount === 5) {
+      gameOverNote.textContent = "It's all done!";
+      gameOver.appendChild(gameOverNote);
+    }
+  }
+  
+  Game();  

@@ -2,10 +2,15 @@ body {
     display:flex;
     flex-direction:column;
     align-items: center;
+    text-align:center;
     color:#fff;
     background-color: #5fb49c;
     font-family: Consolas, sans-serif;
     margin:5vw;
+}
+
+body * {
+    width: 60vw;
 }
 
 h1, h2, h3 {
