@@ -5,86 +5,138 @@ let roundCount = 0;
 let computerCount = 0;
 let playerCount = 0;
 
+const results = document.getElementById("results");
+const topbar = document.getElementById("topbar");
+const outcome = document.getElementById("outcome");
+
+let playerSpace = document.createElement("p");
+let computerSpace = document.createElement("p");
+let errorMessage = document.createElement("p");
+let roundWinner = document.createElement("p");
+let roundCounter = document.createElement("p");
+let outcomeNote = document.createElement("p");
+
+let playerChoice;
+let computerChoice;
+
 const rock = document.querySelector(".rock");
 const paper = document.querySelector(".paper");
 const scissors = document.querySelector(".scissors");
 const done = document.querySelector(".done");
 
-let playerChoice = null;
-let computerChoice = null;
-
-//get & set computerSelection
-const choices = [
-    "rock",
-    "paper",
-    "scissors"
-];
+//set & get computerSelection
+const choices = ["rock", "paper", "scissors"];
 
 function getComputerChoice() {
-    const random = Math.floor(Math.random() * choices.length);
-    let computerChoice = (random, choices[random]);
- //       console.log(`Computer wrote ${computerChoice}`);
+  const random = Math.floor(Math.random() * choices.length);
+  let computerChoice = (random, choices[random]);
+  if (playerChoice !== "None") {
+    console.log(`Computer wrote ${computerChoice}`);
+    // results.append(computerSpace);
+    computerSpace.textContent = `Computer wrote ${computerChoice}`;
     return computerChoice;
-    }
+  } else {
+    computerChoice = "No Survivors";
+  }
+}
 
 // PLAYER CHOICE NEW SECTION START
 
-rock.addEventListener('click', function (e) {
-    let result = e.target.textContent.toLowerCase();
-    playerChoice = result;
+rock.addEventListener("mousedown", function (e) {
+  let result = e.target.textContent.toLowerCase();
+  playerChoice = result;
 });
 
-paper.addEventListener('click', function (e) {
-    let result = e.target.textContent.toLowerCase();
-    playerChoice = result;
+paper.addEventListener("click", function (e) {
+  let result = e.target.textContent.toLowerCase();
+  playerChoice = result;
 });
 
-scissors.addEventListener('click', function (e) {
-    let result = e.target.textContent.toLowerCase();
-    playerChoice = result;
+scissors.addEventListener("click", function (e) {
+  let result = e.target.textContent.toLowerCase();
+  playerChoice = result;
 });
 
 function getPlayerChoice() {
-    if (playerChoice) {
-//        console.log(`Player wrote ${playerChoice}`);
-        return playerChoice;
-    } else {
-        console.log("Please make a selection");
-    }
-};
-
-function playRound(playerChoice,computerChoice) {
-    switch (true) { 
-        case (playerChoice === computerChoice) : 
-            console.log("tie"); 
-            break; 
-        case (playerChoice === "paper" && computerChoice === "rock") : 
-            console.log("player win"); 
-            break; 
-        case (playerChoice === "paper" && computerChoice === "scissors") : 
-            console.log("player lose"); 
-            break; 
-        case (playerChoice === "scissors" && computerChoice === "rock") : 
-            console.log("player lose"); 
-            break; 
-        case (playerChoice === "scissors" && computerChoice === "paper") : 
-            console.log("player lose"); 
-            break; 
-        case (playerChoice === "rock" && computerChoice === "paper") : 
-            console.log("player lose"); 
-            break; 
-        case (playerChoice === "rock" && computerChoice === "scissors") : 
-            console.log("player win"); 
-            break; 
-        default : 
-            break; 
-    }
+  if (playerChoice) {
+    console.log(`Player wrote ${playerChoice}`);
+    // results.append(playerSpace);
+    playerSpace.textContent = `Player wrote ${playerChoice}`;
+    return playerChoice;
+  } else {
+    console.log("Please make a selection");
+    playerChoice = "None";
+  }
 }
 
-done.addEventListener('click', function (e) {
-    playRound( 
-        getPlayerChoice(),
-        getComputerChoice()
-    );
-    playerChoice = null;
+function playRound(playerChoice, computerChoice) {
+  if (computerChoice && playerChoice) {
+    results.append(computerSpace);
+    results.append(playerSpace);
+    roundCount += 1;
+  } else {
+    errorMessage.textContent = "Please make a selection.";
+    results.append(errorMessage);
+    roundCount += 0;
+  }
+  switch (true) {
+    case playerChoice && computerChoice && playerChoice === computerChoice:
+      console.log("tie");
+      outcomeNote.textContent = "It's a tie";
+      break;
+    case playerChoice === "paper" && computerChoice === "rock":
+      console.log("player win");
+      outcomeNote.textContent = "player win";
+      playerCount += 1;
+      break;
+    case playerChoice === "paper" && computerChoice === "scissors":
+      console.log("player lose");
+      outcomeNote.textContent = "player lose";
+      computerCount += 1;
+      break;
+    case playerChoice === "scissors" && computerChoice === "rock":
+      console.log("player lose");
+      outcomeNote.textContent = "player lose";
+      computerCount += 1;
+      break;
+    case playerChoice === "scissors" && computerChoice === "paper":
+      console.log("player win");
+      outcomeNote.textContent = "player win";
+      playerCount += 1;
+      break;
+    case playerChoice === "rock" && computerChoice === "paper":
+      console.log("player lose");
+      outcomeNote.textContent = "player lose";
+      computerCount += 1;
+      break;
+    case playerChoice === "rock" && computerChoice === "scissors":
+      console.log("player win");
+      outcomeNote.textContent = "player win";
+      playerCount += 1;
+      break;
+    default:
+      outcomeNote.textContent = "No winner determined";
+      break;
+  }
+  results.append(roundWinner);
+
+  // console.log(It is Round ${roundCount});
+  roundCounter.textContent = `It is Round ${roundCount}`;
+  roundWinner.textContent = `Computer: ${computerCount} & Player ${playerCount}`;
+  topbar.append(roundCounter, roundWinner);
+  outcome.append(outcomeNote);
+
+  // console.log(Computer wins is ${computerCount});
+  // console.log(Player wins is ${playerCount});
+}
+
+done.addEventListener("click", function (e) {
+  results.textContent = "";
+  playRound(getPlayerChoice(), getComputerChoice());
+  playerChoice = null;
+  computerChoice = null;
 });
+
+function Game() {}
+
+Game();
