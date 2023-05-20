@@ -23,12 +23,11 @@ const choices = [
 function getComputerChoice() {
     const random = Math.floor(Math.random() * choices.length);
     let computerChoice = (random, choices[random]);
-        console.log(`Computer wrote ${computerChoice}`);
+ //       console.log(`Computer wrote ${computerChoice}`);
     return computerChoice;
     }
 
 // PLAYER CHOICE NEW SECTION START
-
 
 rock.addEventListener('click', function (e) {
     let result = e.target.textContent.toLowerCase();
@@ -47,7 +46,7 @@ scissors.addEventListener('click', function (e) {
 
 function getPlayerChoice() {
     if (playerChoice) {
-        console.log(`Player wrote ${playerChoice}`);
+//        console.log(`Player wrote ${playerChoice}`);
         return playerChoice;
     } else {
         console.log("Please make a selection");
