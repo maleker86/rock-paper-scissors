@@ -1,4 +1,4 @@
 # rock-paper-scissors
-Rock Paper Scissors: now with "Play Against Computer"!
+Rock Paper Scissors: now with "Play Against Computer" and "See What You're Doing without hitting F12"!
 
-Please press F12 and then F5 to play. SOON all outputs will be printed to the screen. Soon... 
+Simple UI. The RoundCounting really tripped me up. Nevertheless, hope you have fun and Win! 
