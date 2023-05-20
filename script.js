@@ -161,4 +161,3 @@ done.addEventListener("click", function (e) {
         gameOver.appendChild(gameOverNote);
       }
     }
-    
